@@ -7,6 +7,8 @@ import android.opengl.GLSurfaceView;
 
 import com.google.ar.core.Session;
 
+import java.util.ArrayList;
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -22,6 +24,8 @@ public class MainRenderer implements GLSurfaceView.Renderer {
     RenderCallback mRenderCallback;
 
     int clickBtn = 1;
+
+    ArrayList<ObjRenderer> arrayObj = new ArrayList<>();
 
 
     MainRenderer(Context context, RenderCallback callback){

@@ -324,36 +324,36 @@ public class ObjRenderer {
     float [] myMinPoint;
     float [] myMaxPoint;
 
-    float [][] getMinMaxPoint(){
+    float[][] getMinMaxPoint() {
         calcMinMax();
 
-        float [] localMvMatrix = new float[16]; // 모델 + 뷰
-        float [] localMvpMatrix = new float[16]; // 모델 + 뷰 + 프로젝션
+        float[] localMvMatrix = new float[16]; // 모델 + 뷰
+        float[] localMvpMatrix = new float[16]; // 모델 + 뷰 + 프로젝션
 
-        Matrix.multiplyMM(localMvMatrix, 0, mViewMatrix, 0, mModelMatrix,0);
-        Matrix.multiplyMM(localMvpMatrix, 0, mProjMatrix, 0, localMvMatrix,0);
+        Matrix.multiplyMM(localMvMatrix, 0, mViewMatrix, 0, mModelMatrix, 0);
+        Matrix.multiplyMM(localMvpMatrix, 0, mProjMatrix, 0, localMvMatrix, 0);
 
-        float [] minPoint = new float[4];
-        Matrix.multiplyMV(minPoint,0,mModelMatrix,0,
-                new float[]{myMinPoint[0],myMinPoint[1],myMinPoint[2],1f},0);
+        float[] minPoint = new float[4];
+        Matrix.multiplyMV(minPoint, 0, mModelMatrix, 0,
+                new float[]{myMinPoint[0], myMinPoint[1], myMinPoint[2], 1f}, 0);
 
-        float [] maxPoint = new float[4];
-        Matrix.multiplyMV(maxPoint,0,mModelMatrix,0,
-                new float[]{myMaxPoint[0],myMaxPoint[1],myMaxPoint[2],1f},0);
+        float[] maxPoint = new float[4];
+        Matrix.multiplyMV(maxPoint, 0, mModelMatrix, 0,
+                new float[]{myMaxPoint[0], myMaxPoint[1], myMaxPoint[2], 1f}, 0);
 
-        float [] res0 = new float[3];
+        float[] res0 = new float[3];
 
-        res0[0] = Math.min(myMinPoint[0],myMaxPoint[0]);
-        res0[1] = Math.min(myMinPoint[1],myMaxPoint[1]);
-        res0[2] = Math.min(myMinPoint[2],myMaxPoint[2]);
+        res0[0] = Math.min(minPoint[0], maxPoint[0]);
+        res0[1] = Math.min(minPoint[1], maxPoint[1]);
+        res0[2] = Math.min(minPoint[2], maxPoint[2]);
 
-        float [] res1 = new float[3];
+        float[] res1 = new float[3];
 
-        res1[0] = Math.max(myMinPoint[0],myMaxPoint[0]);
-        res1[1] = Math.max(myMinPoint[1],myMaxPoint[1]);
-        res1[2] = Math.max(myMinPoint[2],myMaxPoint[2]);
+        res1[0] = Math.max(minPoint[0], maxPoint[0]);
+        res1[1] = Math.max(minPoint[1], maxPoint[1]);
+        res1[2] = Math.max(minPoint[2], maxPoint[2]);
 
-        float [][] resAll = {res0, res1};
+        float[][] resAll = {res0, res1};
 
         return resAll;
     }
